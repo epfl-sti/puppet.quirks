@@ -26,4 +26,12 @@ class quirks {
       } ~> Exec[$_please_rerun] 
     }
   }
+
+  # Shuts useless red stuff in Ubuntu 16.04's Puppet
+  $hiera_conf = "${::settings::confdir}/hiera.yaml"
+  exec { "true >> ${hiera_conf}":
+    path => $::path,
+    creates => $hiera_conf
+  }
+  # No need to restart for this one
 }
