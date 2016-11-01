@@ -6,7 +6,7 @@
   "license": "MIT",
   "source": "https://github.com/epfl-sti/puppet.quirks",
   "issues_url": "https://github.com/epfl-sti/puppet.quirks/issues",
-  "project_page": "https://github.com/epfl-sti/puppet.qurks",
+  "project_page": "https://github.com/epfl-sti/puppet.quirks",
   "dependencies": [
     {
         "name":"puppetlabs-stdlib",
