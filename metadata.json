@@ -1,6 +1,6 @@
 {
   "name": "epflsti/quirks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "stiitops@groupes.epfl.ch",
   "summary": "Resolve platform-specific Puppet quirks",
   "license": "MIT",
