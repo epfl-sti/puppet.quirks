@@ -34,4 +34,10 @@ class quirks {
     creates => $hiera_conf
   }
   # No need to restart for this one
+
+  include "quirks::private::puppet_module_versions"
+  ::quirks::private::puppet_module_versions::incompatible_module { "puppetlabs-ntp":
+    req_3x => "< 5.0.0",
+    req_4x => "> 5.0.0"
+  }
 }
