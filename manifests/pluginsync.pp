@@ -1,18 +1,5 @@
-# pluginsync is automatic only for client-server Puppet runs
-# See http://somethingsinistral.net/blog/reading-puppet-pluginsync/
-class quirks::pluginsync() {
-  $libdir = '/var/lib/puppet'   # TODO: probably wrong on some platform or other
-  file { $libdir:
-    ensure  => directory,
-    recurse => true,
-    source  => 'puppet:///plugins',
-    owner   => 'puppet',
-    group   => 'puppet',
-    force   => true,
-    backup  => false,
-    noop    => false,
-    }
-    file { "${libdir}/state":
-      ensure => directory
-    }
-}
+# Kept for backwards compatibility
+#
+# To be honest I don't even remember why this module was there in the first
+# place. Oh well, it is easy enough to resurrect from Git if need be.
+class quirks::pluginsync() {}
