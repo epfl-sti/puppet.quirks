@@ -15,7 +15,8 @@ class quirks::private::puppet_module_versions() {
     $req_3x,
     $req_4x
   ) {
-    $_current_version = $::puppet_module_versions[$title]
+    $puppet_module_versions = parsejson($::puppet_module_versions_json)
+    $_current_version = $puppet_module_versions[$title]
     if (versioncmp($::puppetversion, '5') > 0) {
       fail("Cannot deal with version ${::puppetversion} of Puppet")
     } elsif (versioncmp($::puppetversion, '4') > 0) {
