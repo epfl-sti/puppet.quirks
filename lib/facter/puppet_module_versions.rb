@@ -8,10 +8,16 @@ unless [].respond_to? :to_h
   end
 end
 
+
 Facter.add(:puppet_module_versions) do
+  module_list_cmd = 'puppet module list'
+  if Facter.value(:puppet_run_mode) == 'agent'
+      # Presumably, people who care enough about Puppet agent will take care
+      # of dependencies themselves
+      module_list_cmd += ' 2>/dev/null'
+  end
   setcode do
-   module_list = Facter::Core::Execution.exec('puppet module list | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" |cat -v')
-   module_list.scan(/^.*? (\S+) \(\S*v([^\e]*)/m).to_h
+   Facter::Core::Execution.exec(module_list_cmd).scan(/^.*? (\S+) \(\S*v([^\e]*)/m).to_h
   end
 end
 
