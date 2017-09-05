@@ -10,7 +10,7 @@ end
 
 Facter.add(:puppet_module_versions) do
   setcode do
-   module_list = Facter::Core::Execution.exec('puppet module list')
+   module_list = Facter::Core::Execution.exec('puppet module list | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" |cat -v')
    module_list.scan(/^.*? (\S+) \(\S*v([^\e]*)/m).to_h
   end
 end
