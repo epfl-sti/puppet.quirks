@@ -2,7 +2,7 @@ require 'logger'
 
 $logger = Logger.new(STDERR)
 
-cmdline = File.read("/proc/self/cmdline").split("\000").drop_while do |word|
+cmdline = ARGV.drop_while do |word|
   ! ["apply", "agent"].include? word
 end
 
