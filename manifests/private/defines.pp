@@ -23,18 +23,18 @@ class quirks::private::defines {
     exec { $exec_descr:
       command => "cat ${log_file} >&2; false",
       path => $::path,
-      unless => inline_template('true ; set -x
+      unless => inline_template('true ; set -x ;  exec > <%= @log_file %> 2>&1
       for try in $(seq 1 5); do
          puppet apply -e "<%= @_actual_puppet_mantra %>"
-         case $? in
+         errorcode=$?
+         case "$errorcode" in
            2) continue ;;
-           0) rm -rf <%= @log_file %>; exit 0 ;;
+           0) rm -f <%= @log_file %>; exit 0 ;;
            *)
-             errorcode=$?
              (set +x; tput bold; tput setaf 4; echo >&2 "======================================= sub-Puppet logs (more legible) were kept in <%= @log_file %> ======================================="; tput sgr0)
-             exit $errorcode ;;
+             exit "$errorcode" ;;
          esac
-      done > <%= @log_file %> 2>&1
+      done
       ')
     }
   }
