@@ -17,8 +17,8 @@ Facter.add(:puppet_module_versions) do
       module_list_cmd += ' 2>/dev/null'
   end
   setcode do
-   module_list = Facter::Core::Execution.exec('puppet module list | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" |cat -v')
-   module_list.scan(/^.*? (\S+) \(\S*v([^\e]*)/m).to_h
+    module_list = Facter::Core::Execution.exec('puppet module list | env - PATH="$PATH" "$(which sed)" -e "s,\x1B\[[0-9;]*[a-zA-Z],,g" -e "s/[\d128-\d255]//g"')
+    module_list.scan(/^.*? (\S+) \(v(\S*)\)/m).to_h
   end
 end
 
