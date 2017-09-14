@@ -18,7 +18,7 @@ friendly to broken (distro-provided) Puppets: add this to
 
 ```
     {
-      "name": "epflsti-quirks",
+      "name": "epflsti/quirks",
       "version_requirement": ">= 0.2.1"
     }
 ```
