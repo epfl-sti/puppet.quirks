@@ -9,7 +9,8 @@ class quirks(
       [
        "squelch_hiera_log_noise",
        "no_upstart_in_recent_ubuntu",
-       "broken_operatingsystemmajrelease_xenial"
+       "broken_operatingsystemmajrelease_xenial",
+       "fix_metadata_json_deps"
       ]:
     }
     quirks::private::defines::subquirk_incompatible_module { "puppetlabs-ntp":
