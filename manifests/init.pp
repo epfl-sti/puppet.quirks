@@ -17,5 +17,9 @@ class quirks(
       req_3x => "< 5.0.0",
       req_4x => "> 5.0.0"
     }
+    quirks::private::defines::subquirk_incompatible_module { "puppetlabs-apt":
+      req_3x => "< 3.0.0",
+      req_4x => ">= 4.1.0 > 5.0.0"
+    }
   }  # if ($force_run or $::is_puppet_apply)
 }
