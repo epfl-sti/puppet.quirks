@@ -1,6 +1,6 @@
 {
   "name": "epflsti/quirks",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "stiitops@groupes.epfl.ch",
   "summary": "Resolve platform-specific Puppet quirks",
   "license": "MIT",
@@ -9,5 +9,6 @@
   "issues_url": "https://github.com/epfl-sti/puppet.quirks/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"}
-  ]
+  ],
+  "data_provider": null
 }
