@@ -2,7 +2,10 @@
 class quirks::private::subquirks::no_upstart_in_recent_ubuntu {
   case "${::operatingsystem} ${::operatingsystemrelease}" {
     /^Ubuntu 16/: {
-      file { "/usr/lib/ruby/vendor_ruby/puppet/provider/service/upstart.rb":
+      file { [
+        "/usr/lib/ruby/vendor_ruby/puppet/provider/service/upstart.rb",
+        "/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/provider/service/upstart.rb"
+      ]:
         ensure => "absent"
       }
     }
