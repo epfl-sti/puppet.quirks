@@ -5,20 +5,29 @@ class quirks::private::puppet_module_versions() {
   # === Parameters:
   #
   # $title: The name of the module, e.g. "puppetlabs-ntp"
+  #
   # $req_3x: The version requirement to apply for Puppet 3.x (e.g. "< 5.0.0")
+  #
   # $req_4x: The version requirement to apply for Puppet 4.x (e.g. "> 5.0.0")
+  #
+  # $req_5x: The version requirement to apply for Puppet 5.x (e.g. ">
+  # 5.1.0"). If omitted, same as $req_4x
   #
   # === Actions:
   #
   # * Upgrade or downgrade $title as appropriate
   define incompatible_module(
     $req_3x,
-    $req_4x
+    $req_4x,
+    $req_5x = undef
   ) {
     $puppet_module_versions = parsejson($::puppet_module_versions_json)
     $_current_version = $puppet_module_versions[$title]
-    if (versioncmp($::puppetversion, '5') > 0) {
+    if (versioncmp($::puppetversion, '6') > 0) {
       fail("Cannot deal with version ${::puppetversion} of Puppet")
+    } elsif (versioncmp($::puppetversion, '5') > 0) {
+      $_verclass = "5.x"
+      $_req = $req_5x ? { undef => $req_4x, default => $req_5x }
     } elsif (versioncmp($::puppetversion, '4') > 0) {
       $_verclass = "4.x"
       $_req = $req_4x
