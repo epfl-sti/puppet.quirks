@@ -11,7 +11,7 @@ class quirks::private::subquirks::squelch_hiera_log_noise {
   } elsif ($previous_version !~ /version: 5/) {
     file { $hiera_yaml:
       ensure => "present",
-      content => ::quirks::convert_hiera_yaml($previous_version)
+      content => convert_hiera_yaml_to_v5($previous_version)
     }
     file { "$hiera_yaml.OLD":
       ensure => "present",

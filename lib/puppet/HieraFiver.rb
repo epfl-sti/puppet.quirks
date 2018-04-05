@@ -99,13 +99,3 @@ class HieraFiver
   end
 end
 
-Puppet::Functions.create_function(:'quirks::convert_hiera_yaml') do
-  dispatch :convert do
-    param 'String', :version_3_yaml
-  end
-
-  def convert(version_3_yaml)
-    HieraFiver.new(version_3_yaml).to_5
-  end
-end
-
